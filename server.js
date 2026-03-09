@@ -6,11 +6,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Slack slash command endpoint
 app.post("/run-ui-tests", async (req, res) => {
   const { user_name, text } = req.body;
 
-  // Trigger GitHub workflow
   try {
     const response = await fetch(
       "https://api.github.com/repos/ParasOli/saucedemo-ui-automation/actions/workflows/main.yml/dispatches",
@@ -21,13 +19,13 @@ app.post("/run-ui-tests", async (req, res) => {
           Accept: "application/vnd.github.v3+json",
         },
         body: JSON.stringify({
-          ref: "main", // branch to run workflow on
+          ref: "main", 
         }),
       }
     );
 
     if (response.ok) {
-      return res.send(`Hey ${user_name}, your UI tests are running! 🚀`);
+     return res.send(`Hey ${user_name}, your UI tests are running! 🚀 You’ll get a notification with the detailed report once it’s done.`);
     } else {
       const text = await response.text();
       return res.send(`Failed to trigger workflow. GitHub responded with: ${text}`);
@@ -37,7 +35,6 @@ app.post("/run-ui-tests", async (req, res) => {
   }
 });
 
-// Optional health check for Render
 app.get("/healthz", (req, res) => res.send("OK"));
 
 // Start server
