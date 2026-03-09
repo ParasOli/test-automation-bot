@@ -4,7 +4,6 @@ node_modules/
 # Ignore log files
 *.log
 
-# Ignore environment variables file
 .env
 
 # Ignore build directory
@@ -14,4 +13,4 @@ build/
 coverage/
 
 # Ignore temporary files
-*.tmp
+*.tmp.env
