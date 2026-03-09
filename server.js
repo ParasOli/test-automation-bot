@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import fetch from "node-fetch";
 
@@ -37,6 +36,5 @@ app.post("/run-ui-tests", async (req, res) => {
 
 app.get("/healthz", (req, res) => res.send("OK"));
 
-// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
